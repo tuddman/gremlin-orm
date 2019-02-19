@@ -61,7 +61,7 @@
     }
   ],
   "dependencies": {
-    "gremlin": "^2.6.0"
+    "gremlin": "^3.4.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
