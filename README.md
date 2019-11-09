@@ -3,15 +3,13 @@
 [![Build Status](https://travis-ci.org/gremlin-orm/gremlin-orm.svg?branch=master)](https://travis-ci.org/gremlin-orm/gremlin-orm)
 [![Coverage Status](https://coveralls.io/repos/github/gremlin-orm/gremlin-orm/badge.svg?branch=master&update)](https://coveralls.io/github/gremlin-orm/gremlin-orm?branch=master)
 
-gremlin-orm is an ORM for graph databases in Node.js.  original version is working on Neo4j and Microsoft
-Azure Cosmos DB with more to come in the future.
-
-**we have modified it to work on AWS Neptune
+gremlin-orm is an ORM for graph databases in Node.js.  Works on Neo4j and Microsoft
+Azure Cosmos DB and AWS Neptune.
 
 ## Installation
 
 ```bash
-$ npm install --save gremlin-orm
+$ npm install --save @tuddman/gremlin-orm
 ```
 
 ## Example
@@ -21,7 +19,11 @@ const gremlinOrm = require('gremlin-orm');
 const g = new gremlinOrm('neo4j'); // connects to localhost:8182 by default
 
 // Can pass more configuation
-// const g = new gremlinOrm(['azure', 'partition-name'], process.env.GPORT, process.env.GHOST, {ssl: true, user: process.env.GUSER, password: process.env.GPASS});
+// const g = new gremlinOrm(['azure', 'partition-name'], process.env.GPROTOCOL, process.env.GHOST, process.env.GPORT,  {ssl: true, user: process.env.GUSER, password: process.env.GPASS});
+// or
+// const g = new gremlinOrm('neptune', process.env.GPROTOCOL, process.env.GHOST, process.env.GPORT);  
+// e.g
+// const g = new gremlinOrm('neptune', 'wss', <neptune-endpoint>, 8182);  
 
 const Person = g.define('person', {
   name: {

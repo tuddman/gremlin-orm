@@ -32,7 +32,7 @@ const Graph = gremlin.structure.Graph;
 const graph = new Graph();
 
 var Gorm = (function() {
-  function Gorm(dialect, port, url, options) {
+  function Gorm(dialect, protocol, url, port, options) {
     _classCallCheck(this, Gorm);
 
     // Constants
@@ -45,7 +45,7 @@ var Gorm = (function() {
     var argLength = arguments.length;
 
     var dc = new DriverRemoteConnection(
-      'ws://' + url + ':' + port + '/gremlin',
+      `${protocol}://${url}:${port}/gremlin`,
       {},
     );
 
