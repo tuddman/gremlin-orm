@@ -240,7 +240,8 @@ var VertexModel = (function(_Model) {
             _getRandomVariable4 = _slicedToArray(_getRandomVariable3, 1),
             b = _getRandomVariable4[0];
 
-          // var extraGremlinQuery = vertex.getGremlinStr() + ('.as(\'' + a + '\')') + '.addE(\'' + label + '\')' + this.actionBuilder('property', props) + '.to('this.g.' + this.getGremlinStr() + ').toList()';
+          var extraGremlinQueryOriginal = vertex.getGremlinStr() + ('.as(\'' + a + '\')') + '.addE(\'' + label + '\')' + this.actionBuilder('property', props) + '.to('this.g.' + this.getGremlinStr() + ').toList()';
+          console.log('extraGremlinQueryOriginal = ',extraGremlinQueryOriginal)
           var extraGremlinQuery =
             vertex.getGremlinStr() +
             `.as('${a}')').addE('${label}'` +
@@ -249,13 +250,15 @@ var VertexModel = (function(_Model) {
             this.getGremlinStr() +
             `).toList()`;
 
-          // vertex.getGremlinStr() + '.as(\'' + b + '\')' + this.getGremlinStr().slice(1) + ('.addE(\'' + label + '\')' + this.actionBuilder('property', props) + '.from(\'' + b + '\')');
-          vertex.getGremlinStr() +
-            `.as('${b}')` +
-            this.getGremlinStr().slice(1) +
-            `.addE('${label}'` +
-            this.actionBuilder('property', props) +
-            `.from('${b}')')`;
+          console.log('extraGremlinQuery = ',extraGremlinQuery)
+
+          vertex.getGremlinStr() + '.as(\'' + b + '\')' + this.getGremlinStr().slice(1) + ('.addE(\'' + label + '\')' + this.actionBuilder('property', props) + '.from(\'' + b + '\')');
+          // vertex.getGremlinStr() +
+          //   `.as('${b}')` +
+          //   this.getGremlinStr().slice(1) +
+          //   `.addE('${label}'` +
+          //   this.actionBuilder('property', props) +
+          //   `.from('${b}')')`;
           var intermediate = function intermediate(err, results) {
             if (err) return cb(err);
             var resultsSoFar = results.slice(0);
