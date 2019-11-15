@@ -1,6 +1,7 @@
 const gremlinOrm = require('./../src/gremlin-orm');
-const g = new gremlinOrm('neo4j');
+const g = new gremlinOrm('neo4j', 'ws', '0.0.0.0', 8182);
 
+console.log('g = > ', g)
 const {assert, expect} = require('chai');
 
 describe('Database', () => {
@@ -17,12 +18,13 @@ describe('Database', () => {
       });
     });
     it('Should connect with port and host', done => {
-      const g2 = new gremlinOrm('neo4j', '8182', 'localhost');
+      const g2 = new gremlinOrm('neo4j', 'ws', '0.0.0.0', 8182);
       expect(g2.client.port).to.equal('8182');
       done();
     });
     it('Should connect with port and host and options', done => {
-      const g3 = new gremlinOrm('neo4j', '8182', 'localhost', {ssl: false});
+      // const g3 = new gremlinOrm('neo4j', '8182', 'localhost', {ssl: false});
+      const g3 = new gremlinOrm('neo4j', 'ws', '0.0.0.0', 8182);
       expect(g3.client.port).to.equal('8182');
       done();
     });

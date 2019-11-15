@@ -114,17 +114,25 @@ var VertexModel = function (_Model) {
           _getRandomVariable2 = _slicedToArray(_getRandomVariable, 1),
           a = _getRandomVariable2[0];
 
-      var gremlinQuery = outGremlinStr + ('.as(\'' + a + '\')') + '.addE(\'' + label + '\')' + this.actionBuilder('property', props) + '.to(this.g.' +inGremlinStr + ').toList()';
-      
+      // var gremlinQuery = outGremlinStr + ('.as(\'' + a + '\')') + '.addE(\'' + label + '\')' + this.actionBuilder('property', props) + '.to(this.g.' +inGremlinStr + ').toList()';
+
+      let gremlinQuery = outGremlinStr + `.as('${a}')` + inGremlinStr;
+      gremlinQuery += `.addE('${label}')${this.actionBuilder('property', props)}.from('${a}')`;
+
+
       if (both === true) {
         var _getRandomVariable3 = this.getRandomVariable(1, [a]),
             _getRandomVariable4 = _slicedToArray(_getRandomVariable3, 1),
             b = _getRandomVariable4[0];
 
-        var extraGremlinQuery = vertex.getGremlinStr() + ('.as(\'' + a + '\')') + '.addE(\'' + label + '\')' + this.actionBuilder('property', props) + '.to('this.g.' + this.getGremlinStr() + ').toList()';
-      
+        // var extraGremlinQuery = vertex.getGremlinStr() + ('.as(\'' + a + '\')') + '.addE(\'' + label + '\')' + this.actionBuilder('property', props) + '.to('this.g.' + this.getGremlinStr() + ').toList()';
 
-         vertex.getGremlinStr() + '.as(\'' + b + '\')' + this.getGremlinStr().slice(1) + ('.addE(\'' + label + '\')' + this.actionBuilder('property', props) + '.from(\'' + b + '\')');
+         // vertex.getGremlinStr() + '.as(\'' + b + '\')' + this.getGremlinStr().slice(1) + ('.addE(\'' + label + '\')' + this.actionBuilder('property', props) + '.from(\'' + b + '\')');
+
+
+              let extraGremlinQuery = `${vertex.getGremlinStr()}.as('${b}')${this.getGremlinStr().slice(1)}` +
+                      `.addE('${label}')${this.actionBuilder('property', props)}.from('${b}')`;
+
         var intermediate = function intermediate(err, results) {
           if (err) return cb(err);
           var resultsSoFar = results.slice(0);
